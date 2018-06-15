@@ -1,0 +1,215 @@
+<!doctype html>
+<html>
+
+<head>
+  <title>Interact with the AR world</title>
+  <meta meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+  <style>
+    html,
+    body {
+      margin: auto;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .portrait canvas {
+      transform-origin: 0 0;
+      transform: rotate(-90deg) translateX(-100%);
+    }
+
+    .desktop canvas {
+      transform: scale(-1, 1);
+    }
+
+    .content {
+      width: 100%;
+      margin: auto;
+    }
+
+    #overlay {
+      position: fixed;
+      /* Sit on top of the page content */
+      /*display: none;*/
+      /* Hidden by default */
+      width: 384px;
+      /* Full width (cover the whole page) */
+      height: 100%;
+      /* Full height (cover the whole page) */
+      top: 0;
+      /*left: 0;*/
+      right: -20%;
+      bottom: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      /* Black background with opacity */
+      z-index: 2;
+      /* Specify a stack order in case you're using a different order for other elements */
+      cursor: pointer;
+      /* Add a pointer on hover */
+      /*text-align: center;
+      align-items: center;*/
+      padding: 50px 0;
+      /*transition: all 2s linear;*/
+      opacity: 0;
+    }
+
+    .show {
+      display: block;
+      opacity: 1;
+    }
+
+    #overlayAllTheTime {
+      padding: 20px;
+      border-radius: 25px;
+      position: absolute;
+      /* Sit on top of the page content */
+      display: block;
+      /* Hidden by default */
+      width: auto;
+      /* Full width (cover the whole page) */
+      height: auto;
+      /* Full height (cover the whole page) */
+      left: 10px;
+      top: 10px;
+      background-color: rgba(0, 0, 0, 0.5);
+      /* Black background with opacity */
+      z-index: 2;
+      /* Specify a stack order in case you're using a different order for other elements */
+      cursor: pointer;
+      /* Add a pointer on hover */
+    }
+
+    #overlayButton {
+      padding: 20px;
+      border-radius: 25px;
+      position: absolute;
+      /* Sit on top of the page content */
+      display: none;
+      /* Hidden by default */
+      width: auto;
+      /* Full width (cover the whole page) */
+      height: auto;
+      /* Full height (cover the whole page) */
+      left: 10px;
+      top: 10px;
+      /* Black background with opacity */
+      z-index: 2;
+      /* Specify a stack order in case you're using a different order for other elements */
+      cursor: pointer;
+      /* Add a pointer on hover */
+    }
+
+    hr.style1 {
+      border-top: 5px solid #ffffff;
+    }
+
+    #text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      font-size: 50px;
+      color: white;
+      transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+    }
+  </style>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
+    crossorigin="anonymous">
+  <script defer src='./module/artoolkit-new.min.js'></script>
+  <!--<script defer src='./module/artoolkit.min.js'></script>-->
+  <script defer src='./module/artoolkit.three.js'></script>
+  <script defer src='./module/three.min.js'></script>
+  <!--<script async src='./module/artoolkit.debug.js'></script>-->
+  <!--<script async src='./module/artoolkit.api.js'></script>-->
+  <!--<script src='./loaders/LoadSupport.js'></script>-->
+  <script defer src='./loaders/OBJLoader2.js'></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+    crossorigin="anonymous"></script>
+  <script type="text/javascript">
+    function off() {
+      document.getElementById("overlay").style.opacity = 0;
+      document.getElementById("overlay").style.right = '-100%';
+      document.getElementById("overlay").style.transition = 'right 1s, opacity 1s';
+      document.getElementById("overlay").style.removeProperty('width');
+    }
+    function hide() {
+      var overlayAllTheTime = document.getElementById("overlayAllTheTime");
+      var overlayButton = document.getElementById("overlayButton");
+      if (overlayAllTheTime.style.display === "none") {
+        overlayAllTheTime.style.display = "block";
+        overlayButton.style.display = "none";
+      } else {
+        overlayAllTheTime.style.display = "none";
+        overlayButton.style.display = "block";
+      }
+    }
+  </script>
+</head>
+
+<body>
+  <div class="content">
+    <div id="overlay">
+      <div align="right" style="margin-right: 10px">
+        <button type="button" class="btn btn-secondary" onclick="off()">X</button>
+      </div>
+      <div style="text-align: center;align-items: center;">
+        <h1 style="color:white;">⚕️ Kidney</h1>
+        <p style="color:white; margin: 10px; text-align: justify">
+          The kidneys are two bean-shaped organs present in left and right sides of the body in vertebrates. They are located at the
+          back of the abdominal cavity. In adults they are about 11 centimetres (4.3 in) in length. They receive blood from
+          the paired renal arteries; blood exits into the paired renal veins. Each kidney is attached to a ureter, a tube
+          that carries excreted urine to the bladder.
+        </p>
+        <iframe swidth="450" height="253" src="https://www.youtube.com/embed/FN3MFhYPWWo"></iframe>
+      </div>
+    </div>
+    <div id="overlayAllTheTime" class="content">
+      <h3 style="color:white;">How Your Kidney Look</h3>
+      <hr class="style1">
+      <p style="color:white;">Click the Kidney to show the detail.</p>
+      <p style="font-size:8px;color:white;"> Android or Desktop with Chrome</p>
+      <div align="right" style="margin-right: 10px">
+        <button type="button" class="btn btn-secondary" onclick="hide()">-</button>
+      </div>
+    </div>
+    <div id="overlayButton" class="content">
+      <div align="right" style="margin-right: 10px">
+        <button type="button" class="btn btn-secondary" onclick="hide()">+</button>
+      </div>
+    </div>
+    <script src="bundle.js"></script>
+  </div>
+</body>
+
+</html>
+<!--
+<!doctype HTML>
+<html>
+
+<head>
+  <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.5.0/aframe/examples/vendor/aframe/build/aframe.min.js"></script>
+  <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.5.0/aframe/build/aframe-ar.js"></script>
+  <script src="https://rawgit.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
+</head>
+
+<body style='margin : 0px; overflow: hidden;'>
+  <a-scene embedded stats arjs='trackingMethod: best;'>
+    <a-assets>
+      <a-asset-item id="model" src="https://raw.githubusercontent.com/kalmykov/fr24-3d-models/master/models/b748.glb" crossOrigin="anonymous"></a-asset-item>
+    </a-assets>
+    <a-gltf-model scale=".05 .05 .05" src="#model">
+      <a-animation attribute="position" from="0 0 10" to="0 0 -10" direction="normal" dur="3000" repeat="indefinite"></a-animation>
+    </a-gltf-model>
+    <a-marker-camera preset='hiro'></a-marker-camera>
+    <a-camera-static/>
+  </a-scene>
+</body>
+
+</html>
+-->
