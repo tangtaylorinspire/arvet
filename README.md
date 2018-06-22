@@ -12,3 +12,6 @@
 | three.min.js (three.js minified version)  | [r93](https://github.com/mrdoob/three.js/blob/1300607b1471fd7148cf35169c3eaaa15b44a9d0/build/three.min.js)  |
 | artoolkit.min.js (artoolkit.js minified version)  | [ea819f1  on 29 Jan](https://github.com/artoolkitx/jsartoolkit5/blob/ea819f11566f02eb10fc4d2abd8ce531983c06e2/build/artoolkit.min.js)  |
 | artoolkit.three.js | [afd2765 on 16 Jan](https://github.com/artoolkitx/jsartoolkit5/blob/afd27655c3c3868fc79d579aa2e0898b2981e191/js/artoolkit.three.js) |
+| jquery-3.3.1.slim.min.js (jquery.js minified version) | 3.3.1 |
+| popper.min.js (popper.js minified version) | 1.14.3 |
+| bootstrap.min.js (bootstrap.js minified version) | 4.1.1 |
