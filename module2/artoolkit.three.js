@@ -1,7 +1,7 @@
 /* THREE.js ARToolKit integration */
 
-;(function() {
-	var integrate = function() {
+; (function () {
+	var integrate = function () {
 		/**
 			Helper for setting up a Three.js AR scene using the device camera as input.
 			Pass in the maximum dimensions of the video you want to process and onSuccess and onError callbacks.
@@ -35,14 +35,14 @@
 			@param {function} onSuccess - Called on successful initialization with an ThreeARScene object.
 			@param {function} onError - Called if the initialization fails with the error encountered.
 		*/
-		ARController.getUserMediaThreeScene = function(configuration) {
+		ARController.getUserMediaThreeScene = function (configuration) {
 			var obj = {};
 			for (var i in configuration) {
 				obj[i] = configuration[i];
 			}
 			var onSuccess = configuration.onSuccess;
 
-			obj.onSuccess = function(arController, arCameraParam) {
+			obj.onSuccess = function (arController, arCameraParam) {
 				var scenes = arController.createThreeScene();
 				onSuccess(scenes, arController, arCameraParam);
 			};
@@ -79,7 +79,7 @@
 
 			@param video Video image to use as scene background. Defaults to this.image
 		*/
-		ARController.prototype.createThreeScene = function(video) {
+		ARController.prototype.createThreeScene = function (video) {
 			video = video || this.image;
 
 			this.setupThree();
@@ -92,8 +92,8 @@
 
 			// Then create a plane textured with the video.
 			var plane = new THREE.Mesh(
-			  new THREE.PlaneBufferGeometry(2, 2),
-			  new THREE.MeshBasicMaterial({map: videoTex, side: THREE.DoubleSide})
+				new THREE.PlaneBufferGeometry(2, 2),
+				new THREE.MeshBasicMaterial({ map: videoTex, side: THREE.DoubleSide })
 			);
 
 			// The video plane shouldn't care about the z-buffer.
@@ -108,7 +108,7 @@
 			videoScene.add(videoCamera);
 
 			if (this.orientation === 'portrait') {
-				plane.rotation.z = Math.PI/2;
+				
 			}
 
 			var scene = new THREE.Scene();
@@ -131,7 +131,7 @@
 
 				video: video,
 
-				process: function() {
+				process: function () {
 					for (var i in self.threePatternMarkers) {
 						self.threePatternMarkers[i].visible = false;
 					}
@@ -140,7 +140,7 @@
 					}
 					for (var i in self.threeMultiMarkers) {
 						self.threeMultiMarkers[i].visible = false;
-						for (var j=0; j<self.threeMultiMarkers[i].markers.length; j++) {
+						for (var j = 0; j < self.threeMultiMarkers[i].markers.length; j++) {
 							if (self.threeMultiMarkers[i].markers[j]) {
 								self.threeMultiMarkers[i].markers[j].visible = false;
 							}
@@ -149,7 +149,7 @@
 					self.process(video);
 				},
 
-				renderOn: function(renderer) {
+				renderOn: function (renderer) {
 					videoTex.needsUpdate = true;
 
 					var ac = renderer.autoClear;
@@ -179,7 +179,7 @@
 			@param {number} markerWidth The width of the marker, defaults to 1.
 			@return {THREE.Object3D} Three.Object3D that tracks the given marker.
 		*/
-		ARController.prototype.createThreeMarker = function(markerUID, markerWidth) {
+		ARController.prototype.createThreeMarker = function (markerUID, markerWidth) {
 			this.setupThree();
 			var obj = new THREE.Object3D();
 			obj.markerTracker = this.trackPatternMarkerId(markerUID, markerWidth);
@@ -203,7 +203,7 @@
 			@param {number} markerUID The UID of the marker to track.
 			@return {THREE.Object3D} Three.Object3D that tracks the given marker.
 		*/
-		ARController.prototype.createThreeMultiMarker = function(markerUID) {
+		ARController.prototype.createThreeMultiMarker = function (markerUID) {
 			this.setupThree();
 			var obj = new THREE.Object3D();
 			obj.matrixAutoUpdate = false;
@@ -228,7 +228,7 @@
 			@param {number} markerWidth The width of the marker, defaults to 1.
 			@return {THREE.Object3D} Three.Object3D that tracks the given marker.
 		*/
-		ARController.prototype.createThreeBarcodeMarker = function(markerUID, markerWidth) {
+		ARController.prototype.createThreeBarcodeMarker = function (markerUID, markerWidth) {
 			this.setupThree();
 			var obj = new THREE.Object3D();
 			obj.markerTracker = this.trackBarcodeMarkerId(markerUID, markerWidth);
@@ -237,7 +237,7 @@
 			return obj;
 		};
 
-		ARController.prototype.setupThree = function() {
+		ARController.prototype.setupThree = function () {
 			if (this.THREE_JS_ENABLED) {
 				return;
 			}
@@ -246,7 +246,7 @@
 			/*
 				Listen to getMarker events to keep track of Three.js markers.
 			*/
-			this.addEventListener('getMarker', function(ev) {
+			this.addEventListener('getMarker', function (ev) {
 				var marker = ev.data.marker;
 				var obj;
 				if (ev.data.type === artoolkit.PATTERN_MARKER) {
@@ -257,7 +257,7 @@
 
 				}
 				if (obj) {
-					obj.matrix.fromArray(ev.data.matrix);
+					obj.matrix.fromArray(ev.data.matrixGL_RH);
 					obj.visible = true;
 				}
 			});
@@ -265,10 +265,10 @@
 			/*
 				Listen to getMultiMarker events to keep track of Three.js multimarkers.
 			*/
-			this.addEventListener('getMultiMarker', function(ev) {
+			this.addEventListener('getMultiMarker', function (ev) {
 				var obj = this.threeMultiMarkers[ev.data.multiMarkerId];
 				if (obj) {
-					obj.matrix.fromArray(ev.data.matrix);
+					obj.matrix.fromArray(ev.data.matrixGL_RH);
 					obj.visible = true;
 				}
 			});
@@ -276,7 +276,7 @@
 			/*
 				Listen to getMultiMarkerSub events to keep track of Three.js multimarker submarkers.
 			*/
-			this.addEventListener('getMultiMarkerSub', function(ev) {
+			this.addEventListener('getMultiMarkerSub', function (ev) {
 				var marker = ev.data.multiMarkerId;
 				var subMarkerID = ev.data.markerIndex;
 				var subMarker = ev.data.marker;
@@ -306,8 +306,7 @@
 
 	};
 
-
-	var tick = function() {
+	var tick = function () {
 		if (window.ARController && window.THREE) {
 			integrate();
 			if (window.ARThreeOnLoad) {
@@ -315,7 +314,7 @@
 			}
 		} else {
 			setTimeout(tick, 50);
-		}			
+		}
 	};
 
 	tick();

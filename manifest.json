@@ -1,0 +1,23 @@
+{
+    "name": "AR Kidney",
+    "short_name": "AR Kidney",
+    "theme_color": "rgba(255, 165, 000, 0.8)",
+    "background_color": "#222",
+    "display": "fullscreen",
+    "start_url": "/index_mobile.html",
+    "orientation": "portrait",
+    "icons": [
+        {
+            "src": "",
+            "sizes": "72x72"
+        },
+        {
+            "src": "",
+            "sizes": "192x192"
+        },
+        {
+            "src": "",
+            "sizes": "512x512"
+        }
+    ]
+}
