@@ -6,7 +6,7 @@
 <script async src="artoolkit.three.js"></script>
 ```
 
-## Creacte Object
+## Creacte Objectt
 ### Shpere
 ```javascript
 var createShpere = function () {
