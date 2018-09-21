@@ -1,0 +1,307 @@
+<!doctype html>
+<html>
+
+<head>
+  <link rel="manifest" href="/manifest.json" />
+  <title>AR Kidney</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=1">
+  <link rel="stylesheet" type="text/css" href="./CSS/style.css">
+  <link href="https://fonts.googleapis.com/css?family=Lato|Spinnaker" rel="stylesheet">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B"
+    crossorigin="anonymous">
+  <!--<script defer src='./module/artoolkit-new.min.js'></script>-->
+  <!--<script defer src='./module/artoolkit.min.js'></script>-->
+  <!--<script defer src='./module/artoolkit-new-un.min.js'></script>
+  <script defer src='./module/artoolkit.three.js'></script>
+  <script defer src='./module/three.min.js'></script>-->
+  <!--<script async src='./module/artoolkit.debug.js'></script>-->
+  <!--<script async src='./module/artoolkit.api.js'></script>-->
+  <!--<script src='./loaders/LoadSupport.js'></script>-->
+  <script defer src='./module2/three.min.js'></script>
+  <script async src='./module/artoolkit.debug.js'></script>
+  <script defer src='./module2/artoolkit.three.js'></script>
+  <script defer src='./module2/artoolkit.api.js'></script>
+  <script defer src='./loaders/OBJLoader2.js'></script>
+  <script defer src='./loaders/OrbitControls.js'></script>
+  <script defer src='./loaders/Water2.js'></script>
+  <script defer src='./loaders/Reflector.js'></script>
+  <script defer src='./loaders/Refractor.js'></script>
+  <script defer src='./loaders/EffectComposer.js'></script>
+  <script defer src='./loaders/ShaderPass.js'></script>
+  <script defer src='./loaders/CopyShader.js'></script>
+  <script defer src='./loaders/MaskPass.js'></script>
+  <script defer src='./loaders/RenderPass.js'></script>
+  <script defer src="bundle.js"></script>
+  <script type="text/javascript">
+    if (/Android|mobile|iPad|iPhone/i.test(navigator.userAgent)) {
+      document.getElementById("overlayIntro").style.display = "none";
+      document.getElementById("overlayIntro-phone").style.display = "block";
+    }
+
+    function off() {
+      document.getElementById("overlayKindney").style.opacity = 0;
+      document.getElementById("overlayKindney").style.right = '-100%';
+      document.getElementById("overlayKindney").style.transition = 'right 1s, opacity 1s';
+      document.getElementById("overlayKindney").style.removeProperty('width');
+
+      document.getElementById("overlayUreter").style.opacity = 0;
+      document.getElementById("overlayUreter").style.right = '-100%';
+      document.getElementById("overlayUreter").style.transition = 'right 1s, opacity 1s';
+      document.getElementById("overlayUreter").style.removeProperty('width');
+    }
+
+    function hide() {
+      var overlayAllTheTime = document.getElementById("overlayAllTheTime");
+      var overlayButton = document.getElementById("overlayButton");
+      if (overlayAllTheTime.style.display === "none") {
+        overlayAllTheTime.style.display = "block";
+        overlayButton.style.display = "none";
+      } else {
+        overlayAllTheTime.style.display = "none";
+        overlayButton.style.display = "block";
+      }
+    }
+
+    function hideIntro() {
+      document.getElementById("overlayReload").style.right = '5%';
+      document.getElementById("overlayReload").style.transition = 'right 3s';
+      document.getElementById("controlGp").style.right = '1%';
+      document.getElementById("controlGp").style.transition = 'right 3s';
+      document.getElementById("overlayDrinkGp").style.left = '5%';
+      document.getElementById("overlayDrinkGp").style.transition = 'left 3s';
+      document.getElementById("overlayLogoGp").style.left = '3%';
+      document.getElementById("overlayLogoGp").style.transition = 'left 3s';
+      if (/Android|mobile|iPad|iPhone/i.test(navigator.userAgent)) {
+        document.body.style.overflow = 'hidden';
+        document.getElementById("overlayIntro-phone").style.opacity = 0;
+        document.getElementById("overlayIntro-phone").style.top = '-100%';
+        document.getElementById("overlayIntro-phone").style.transition = 'top 3s, opacity 3s';
+        document.body.webkitRequestFullscreen();
+      } else {
+        document.getElementById("overlayIntro").style.opacity = 0;
+        document.getElementById("overlayIntro").style.top = '-100%';
+        document.getElementById("overlayIntro").style.transition = 'top 3s, opacity 3s';
+      }
+
+      //document.getElementById("plainBg").style.opacity = 1;
+      //document.getElementById("plainBg").style.top = '0.1px';
+
+      /*var script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src = "./bundle.js";
+      document.getElementsByTagName("head")[0].appendChild(script);*/
+    }
+
+    function reload() {
+      location.reload();
+    }
+  </script>
+</head>
+
+<body>
+  <div class="content">
+
+    <div id="plainBg">
+      <div style="position: absolute;top: 50%;left: 50%;margin: -60px 0 0 -60px;text-align: center">
+        <div class="loader"></div>
+        <h4 style="margin-top: 10px">Loading</h4>
+        <h6 id="loading">0%</h6>
+      </div>
+    </div>
+
+    <div id="overlayIntro">
+      <table style="position: relative;top:50%;transform:translateY(-50%);width: 100%">
+        <tr>
+          <td>
+            <div>
+              <h1 style="color:white;-webkit-filter: drop-shadow(12px 12px 7px rgba(0, 0, 0, 0.7));
+                filter: drop-shadow(12px 12px 7px rgba(0, 0, 0, 0.7));font-family: 'Spinnaker', sans-serif;">KidneyAR</h1>
+              <h2 style="color:white;-webkit-filter: drop-shadow(12px 12px 7px rgba(0, 0, 0, 0.7));
+                filter: drop-shadow(12px 12px 7px rgba(0, 0, 0, 0.7));font-family: 'Spinnaker', sans-serif;">Pee For Kids</h2>
+
+              <div id="overlayID" style="color:white;font-size: 1.25vw;font-weight: bold; margin-top: 17.7%">0</div>
+              <hr class="style1" width="40px" align="left">
+              <h5 style="color:white;">Click the Boy to Start!</h5>
+
+              <div id="overlayID" style="color:white;font-size: 1.25vw;font-weight: bold; margin-top: 5%">1</div>
+              <hr class="style1" width="40px" align="left">
+              <h5 style="color:white;">Let the camera read the marker.</h5>
+
+              <div id="overlayID" style="color:white;font-size: 1.25vw;font-weight: bold; margin-top: 5%">2</div>
+              <hr class="style1" width="40px" align="left">
+              <h5 style="color:white;">Click the Kidney to show the detail.</h5>
+              <div style="color:white;font-size:0.7vw;margin-top: 25%;">For Chrome with Android or Desktop.</div>
+            </div>
+          </td>
+          <td align="center">
+            <img id="peeBoy" src="./Assets/peeBoy.png" height="600" width="600" style="-webkit-filter: drop-shadow(12px 12px 7px rgba(0, 0, 0, 0.7));
+                filter: drop-shadow(12px 12px 7px rgba(0, 0, 0, 0.7));max-width: 80%;height: auto;width: auto\9;" onclick="hideIntro()">
+          </td>
+        </tr>
+        <tr>
+          <td COLSPAN=2 align="center">
+            <div style="color:white;font-size:0.7vw;padding-right: 10%;margin-top: 2%;">Copyright © 2018. All Rights Reserved. The Chinese University of Hong Kong.</div>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <div id="overlayIntro-phone">
+      <div>
+        <h1 style="color:white;-webkit-filter: drop-shadow(12px 12px 7px rgba(0, 0, 0, 0.7));
+                filter: drop-shadow(12px 12px 7px rgba(0, 0, 0, 0.7));">KidneyAR</h1>
+        <h2 style="color:white;-webkit-filter: drop-shadow(12px 12px 7px rgba(0, 0, 0, 0.7));
+                filter: drop-shadow(12px 12px 7px rgba(0, 0, 0, 0.7));">Pee For Kids</h2>
+
+        <div id="overlayID" style="color:white;font-size: 4.17vw;font-weight: bold; margin-top: 17.7%">0</div>
+        <hr class="style1" width="40px" align="left">
+        <h5 style="color:white;">Scroll and Click the Boy to Start!</h5>
+
+        <div id="overlayID" style="color:white;font-size: 4.17vw;font-weight: bold; margin-top: 5%">1</div>
+        <hr class="style1" width="40px" align="left">
+        <h5 style="color:white;">Let the camera read the marker.</h5>
+
+        <div id="overlayID" style="color:white;font-size: 4.17vw;font-weight: bold; margin-top: 5%">2</div>
+        <hr class="style1" width="40px" align="left">
+        <h5 style="color:white;">Click the Kidney to show the detail.</h5>
+
+        <img id="peeBoy" src="./Assets/peeBoy.png" height="600" width="600" style="-webkit-filter: drop-shadow(12px 12px 7px rgba(0, 0, 0, 0.7));
+                filter: drop-shadow(12px 12px 7px rgba(0, 0, 0, 0.7));max-width: 100%;height: auto;width: auto\9;padding-bottom: 5%;padding-right: 10%;margin-top: 20%;"
+          onclick="hideIntro()">
+
+        <div style="color:white;font-size:3.17vw;font-weight: bold; margin-top: 12.5%;padding-bottom: 5%;">For Chrome with Android or Desktop.</div>
+      </div>
+    </div>
+
+    <div id="overlayDetect">
+      <div style="position: relative;top:50%;transform:translateY(-50%);">
+        <h1 style="color:white;">Alert</h1>
+        <hr class="style1" width="10%" align="left">
+        <h5 style="color:white;">Please rotate your screen or resize your browser!</h5>
+      </div>
+    </div>
+
+    <div id="overlayKindney">
+      <div align="right" style="margin-right: 10px">
+        <div id="overlayID" style="color:white;font-size: 12px;font-weight: bold;" onclick="off()" data-toggle="tooltip" title="Close">X</div>
+      </div>
+      <div style="text-align: center;align-items: center;">
+        <h1 style="color:white;">⚕️ Kidney</h1>
+        <p style="color:white; text-align: justify; margin-top: 18.5%; margin-left: 20px; margin-right: 20px;">
+          Water is essential because it keeps us hydrated and alive! Therefore, drinking water is important. We each have two kidneys.
+          These are bean-shaped organs positioned on the two sides of your back and protected by the ribs and a thick surrounding
+          layer of fat. Do you how your kidneys work?
+        </p>
+        <iframe style="color:white; margin: 10px; text-align: justify; margin-top: 5%" swidth="450" height="253" src="https://www.youtube.com/embed/FN3MFhYPWWo"></iframe>
+      </div>
+    </div>
+
+    <div id="overlayUreter">
+      <div align="right" style="margin-right: 10px">
+        <div id="overlayID" style="color:white;font-size: 12px;font-weight: bold;" onclick="off()" data-toggle="tooltip" title="Close">X</div>
+      </div>
+      <div style="text-align: center;align-items: center;">
+        <h1 style="color:white;">⚕️ Ureter</h1>
+        <p style="color:white; text-align: justify; margin-top: 18.5%; margin-left: 20px; margin-right: 20px;">
+          In human anatomy, the ureters are tubes made of smooth muscle fibers that propel urine from the kidneys to the urinary bladder.
+          In the adult, the ureters are usually 25–30 cm (10–12 in) long and around 3–4 mm (0.12–0.16 in) in diameter. Histologically,
+          the ureter is lined by the urothelium, a type of transitional epithelium, and has an additional smooth muscle layer
+          in the more distal one-third to assist with peristalsis.
+        </p>
+        <iframe style="color:white; margin: 10px; text-align: justify; margin-top: 5%" swidth="450" height="253" src="https://www.youtube.com/embed/-yfuSrt-0Uk"></iframe>
+      </div>
+    </div>
+
+    <div id="controlGp" style="right: -100%;top: 2%;width: 100px;height: 200px;position: absolute;display: block;">
+      <table>
+        <tr>
+          <td>
+            <div id="hdBtn" style="color:white;-webkit-filter: drop-shadow(5px 5px 3px rgba(0, 0, 0, 0.7));vertical-align:middle;
+              filter: drop-shadow(5px 5px 3px rgba(0, 0, 0, 0.7));font-family: 'Spinnaker', sans-serif;border-radius: 20px;
+              position: absolute;display: block;width: 40px;height: 40px;background-color: rgba(192,192,192, 0.8);
+              line-height: 40px;text-align: center;font-size: 10px;" data-toggle="tooltip" title="HD 3D models & textures">
+              HD
+            </div>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div id="overlayReload" class="content" align="center" style="color:white;font-size: 20px;font-weight: bold;" onClick="reload();"
+      data-toggle="tooltip" title="Reload the Application">Reload</div>
+
+    <div id="overlayLogoGp" style="left: -100%;top: 3%;width: 200px;height: 200px;position: absolute;display: block;">
+      <table>
+        <tr>
+          <td>
+            <img id="imglogo" src="./Assets/white logo.png" height="50" width="50" style="-webkit-filter: drop-shadow(5px 5px 3px rgba(0, 0, 0, 0.7));
+            filter: drop-shadow(5px 5px 3px rgba(0, 0, 0, 0.7));">
+          </td>
+          <td style="padding-left: 5px">
+            <h7 style="color:white;-webkit-filter: drop-shadow(5px 5px 3px rgba(0, 0, 0, 0.7));vertical-align:middle;
+              filter: drop-shadow(5px 5px 3px rgba(0, 0, 0, 0.7));font-family: 'Spinnaker', sans-serif;">KidneyAR</h7>
+            <BR>
+            <h7 style="color:white;-webkit-filter: drop-shadow(5px 5px 3px rgba(0, 0, 0, 0.7)); vertical-align:middle;
+              filter: drop-shadow(5px 5px 3px rgba(0, 0, 0, 0.7));font-family: 'Spinnaker', sans-serif;">Pee For Kids</h7>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <div id="overlayDrinkGp" style="left: -100%;bottom: 5%;z-index: 2;width: 50px;height: 200px;position: absolute;display: block;">
+      <div id="OverlayWater" class="content" align="center" style="color:white;font-size: 10px;font-weight: bold;margin-top: 50%;background-color: rgba(12,132, 230,0.8)"
+        data-toggle="tooltip" data-placement="right" title="Drink Water">Water</div>
+      <div id="OverlayMilk" class="content" align="center" style="color:white;font-size: 10px;font-weight: bold;margin-top: 10px;background-color: rgba(220, 217, 205, 0.8)"
+        data-toggle="tooltip" data-placement="right" title="Drink Milk">Milk</div>
+      <div id="OverlayJuice" class="content" align="center" style="color:white;font-size: 10px;font-weight: bold;margin-top: 10px;background-color: rgba(255, 127, 51,0.8)"
+        data-toggle="tooltip" data-placement="right" title="Drink Orange Juice">Juice</div>
+    </div>
+
+    <div id="overlayButton" class="content">
+      <div align="right" style="margin-right: 10px">
+        <button type="button" class="btn btn-secondary" onclick="hide()">+</button>
+      </div>
+    </div>
+  </div>
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em"
+    crossorigin="anonymous"></script>
+  <script>
+    $(document).ready(function () {
+      $('[data-toggle="tooltip"]').tooltip();
+    });
+  </script>
+</body>
+
+</html>
+<!--
+<!doctype HTML>
+<html>
+
+<head>
+  <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.5.0/aframe/examples/vendor/aframe/build/aframe.min.js"></script>
+  <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.5.0/aframe/build/aframe-ar.js"></script>
+  <script src="https://rawgit.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
+</head>
+
+<body style='margin : 0px; overflow: hidden;'>
+  <a-scene embedded stats arjs='trackingMethod: best;'>
+    <a-assets>
+      <a-asset-item id="model" src="https://raw.githubusercontent.com/kalmykov/fr24-3d-models/master/models/b748.glb" crossOrigin="anonymous"></a-asset-item>
+    </a-assets>
+    <a-gltf-model scale=".05 .05 .05" src="#model">
+      <a-animation attribute="position" from="0 0 10" to="0 0 -10" direction="normal" dur="3000" repeat="indefinite"></a-animation>
+    </a-gltf-model>
+    <a-marker-camera preset='hiro'></a-marker-camera>
+    <a-camera-static/>
+  </a-scene>
+</body>
+
+</html>
+-->

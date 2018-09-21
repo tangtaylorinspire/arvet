@@ -1,0 +1,445 @@
+html, body {
+      margin: auto;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      overflow: hidden;
+      background-color: #FFFFFF
+    }
+
+    /*.portrait canvas {
+      transform-origin: 0 0;
+      transform: rotate(-90deg) translateX(-100%);
+    }*/
+
+    /*.desktop canvas {
+      z-index: 2;
+    }*/
+
+    .desktop{
+      font-size: 100%;
+    }
+
+    .phone{
+      font-size: 100%;
+    }
+
+    .content {
+      width: 100%;
+      margin: auto;
+      font-family: 'Lato', sans-serif;
+    }
+
+    #overlayKindney {
+      position: fixed;
+      /* Sit on top of the page content */
+      /*display: none;*/
+      /* Hidden by default */
+      width: 384px;
+      /* Full width (cover the whole page) */
+      height:100%;
+      /* Full height (cover the whole page) */
+      top: 0;
+      /*left: 0;*/
+      right: -100%;
+      bottom: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      /* Black background with opacity */
+      z-index: 4;
+      /* Specify a stack order in case you're using a different order for other elements */
+      cursor: pointer;
+      /* Add a pointer on hover */
+      /*text-align: center;
+      align-items: center;*/
+      padding: 50px 0;
+      /*transition: all 2s linear;*/
+      opacity: 0;
+    }
+
+    #overlayUreter {
+      position: fixed;
+      /* Sit on top of the page content */
+      /*display: none;*/
+      /* Hidden by default */
+      width: 384px;
+      /* Full width (cover the whole page) */
+      height: 100%;
+      /* Full height (cover the whole page) */
+      top: 0;
+      /*left: 0;*/
+      right: -100%;
+      bottom: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      /* Black background with opacity */
+      z-index: 4;
+      /* Specify a stack order in case you're using a different order for other elements */
+      cursor: pointer;
+      /* Add a pointer on hover */
+      /*text-align: center;
+      align-items: center;*/
+      padding: 50px 0;
+      /*transition: all 2s linear;*/
+      opacity: 0;
+    }
+
+    .show {
+      display: block;
+      opacity: 1;
+    }
+
+    #overlayReload {
+      border-radius: 50px;
+      position: absolute;
+      /* Sit on top of the page content */
+      display: block;
+      /* Hidden by default */
+      width: 100px;
+      /* Full width (cover the whole page) */
+      height: 100px;
+      /* Full height (cover the whole page) */
+      right: -100%;
+      bottom: 5%;
+      background-color: rgba(255, 165, 000, 0.8);
+      /* Black background with opacity */
+      /* Specify a stack order in case you're using a different order for other elements */
+      cursor: pointer;
+      /* Add a pointer on hover */
+      line-height: 100px;
+      text-align: center;
+    }
+
+    #OverlayWater, #OverlayMilk, #OverlayJuice  {
+      border-radius: 25px;
+      /* Sit on top of the page content */
+      /*display: none;*/
+      /* Hidden by default */
+      width: 50px;
+      /* Full width (cover the whole page) */
+      height: 50px;
+      /* Full height (cover the whole page) */
+      /* Black background with opacity */
+      /* Specify a stack order in case you're using a different order for other elements */
+      cursor: pointer;
+      /* Add a pointer on hover */
+      line-height: 50px;
+      text-align: center;
+    }
+
+    #overlayIDK, #overlayIDU, #overlayID {
+      border-radius: 20px;
+      /* Sit on top of the page content */
+      display: block;
+      /* Hidden by default */
+      width: 2.08vw;
+      /* Full width (cover the whole page) */
+      height: 2.08vw;
+      /* Full height (cover the whole page) */
+      background-color: rgba(255, 165, 000, 0.8);
+      /* Black background with opacity */
+      z-index: 2;
+      /* Specify a stack order in case you're using a different order for other elements */
+      cursor: pointer;
+      /* Add a pointer on hover */
+      line-height: 2.08vw;
+      text-align: center;
+      border: none;
+    }
+
+    #overlayZoom {
+      border-radius: 20px;
+      /* Sit on top of the page content */
+      display: block;
+      /* Hidden by default */
+      width: 2.08vw;
+      /* Full width (cover the whole page) */
+      height: 2.08vw;
+      /* Full height (cover the whole page) */
+      background-color: rgba(172,172,69,0.8);
+      /* Black background with opacity */
+      z-index: 2;
+      /* Specify a stack order in case you're using a different order for other elements */
+      cursor: pointer;
+      /* Add a pointer on hover */
+      line-height: 2.08vw;
+      text-align: center;
+      border: none;
+    }
+
+    #conBtn{
+      color:white;
+      vertical-align:middle;
+      -webkit-filter: drop-shadow(5px 5px 3px rgba(0, 0, 0, 0.7));
+      filter: drop-shadow(5px 5px 3px rgba(0, 0, 0, 0.7));
+      font-family: 'Spinnaker', sans-serif;
+      display: block;
+      width: 40px;
+      height: 40px;
+      line-height: 40px;
+      text-align: center;
+      font-size: 10px;
+    }
+
+    #conBtn #hdBtn{
+      border-radius: 20px;
+      background-color: rgba(192,192,192, 0.8);
+    }
+
+    #conBtn #shLabel{
+      border-radius: 20px;
+      background-color: rgba(192,192,192, 0.8);
+    }
+
+    #overlayID-phone {
+      border-radius: 20px;
+      /* Sit on top of the page content */
+      display: block;
+      /* Hidden by default */
+      width: 8vw;
+      /* Full width (cover the whole page) */
+      height: 8vw;
+      /* Full height (cover the whole page) */
+      background-color: rgba(255, 165, 000, 0.8);
+      /* Black background with opacity */
+      z-index: 2;
+      /* Specify a stack order in case you're using a different order for other elements */
+      cursor: pointer;
+      /* Add a pointer on hover */
+      line-height: 8vw;
+      text-align: center;
+    }
+
+    #overlayButton {
+      padding: 20px;
+      border-radius: 25px;
+      position: absolute;
+      /* Sit on top of the page content */
+      display: none;
+      /* Hidden by default */
+      width: auto;
+      /* Full width (cover the whole page) */
+      height: auto;
+      /* Full height (cover the whole page) */
+      left: 10px;
+      top: 10px;
+      /* Black background with opacity */
+      z-index: 2;
+      /* Specify a stack order in case you're using a different order for other elements */
+      cursor: pointer;
+      /* Add a pointer on hover */
+    }
+
+    #overlayDetect {
+      padding: 20px;
+      position: absolute;
+      /* Sit on top of the page content */
+      display: none;
+      /* Hidden by default */
+      width: 100%;
+      /* Full width (cover the whole page) */
+      height: 100%;
+      /* Full height (cover the whole page) */
+      top: 0.1px;
+      /* Black background with opacity */
+      z-index: 3;
+      /* Specify a stack order in case you're using a different order for other elements */
+      cursor: pointer;
+      /* Add a pointer on hover */
+      background-color: rgba(0, 0, 0, 0.8);
+    }
+
+    #overlayIntro {
+      padding-left: 10%;
+      position: absolute;
+      /* Sit on top of the page content */
+      display: block;
+      /* Hidden by default */
+      width: 100%;
+      /* Full width (cover the whole page) */
+      height: 100%;
+      /* Full height (cover the whole page) */
+      top: 0.1px;
+      /* Black background with opacity */
+      z-index: 3;
+      /* Specify a stack order in case you're using a different order for other elements */
+      cursor: pointer;
+      /* Add a pointer on hover */
+      background-color: rgba(72, 72, 72, 0.6);
+      /*background-color: rgb(153, 101, 4, 0.8);*/
+    }
+
+    #overlayIntro-phone {
+      padding-top: 10%;
+      padding-left: 10%;
+      position: absolute;
+      /* Sit on top of the page content */
+      display: none;
+      /* Hidden by default */
+      width: 100%;
+      /* Full width (cover the whole page) */
+      overflow: auto;
+      /* Full height (cover the whole page) */
+      top: 0.1px;
+      /* Black background with opacity */
+      z-index: 3;
+      /* Specify a stack order in case you're using a different order for other elements */
+      cursor: pointer;
+      /* Add a pointer on hover */
+      background-color: rgba(72, 72, 72, 0.6);
+      /*background-color: rgb(153, 101, 4, 0.8);*/
+    }
+
+    #plainBg {
+      position: absolute;
+      /* Sit on top of the page content */
+      opacity: 1;
+      
+      /* Hidden by default */
+      width: 100%;
+      /* Full width (cover the whole page) */
+      height: 100%;
+      /* Full height (cover the whole page) */
+      top: 0.1px;
+      /* Black background with opacity */
+      z-index: 2147483647;
+      /* Specify a stack order in case you're using a different order for other elements */
+      cursor: pointer;
+      /* Add a pointer on hover */
+      background-color: #FFFFFF
+    }
+
+    hr.style1 {
+      border-top: 3px solid #ffffff;
+    }
+
+    #text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      font-size: 50px;
+      color: white;
+      transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+    }
+
+    /*img:hover {
+      opacity: 0.5;
+    }*/
+
+    #peeBoy:hover {
+      opacity: 0.5;
+    }
+
+    .loader {
+      border: 16px solid #f3f3f3;
+      /* Light grey */
+      border-top: 16px solid rgba(255, 165, 000, 0.8);
+      border-radius: 50%;
+      width: 120px;
+      height: 120px;
+      animation: spin 2s linear infinite;
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    footer {
+      border-radius: 50px;
+      position: absolute;
+      /* Sit on top of the page content */
+      display: block;
+      /* Hidden by default */
+      width: 100%;
+      /* Full width (cover the whole page) */
+      height: 100px;
+      /* Full height (cover the whole page) */
+      bottom: 5%;
+      /* Black background with opacity */
+      z-index: 2;
+      /* Specify a stack order in case you're using a different order for other elements */
+      cursor: pointer;
+      /* Add a pointer on hover */
+      line-height: 100px;
+      text-align: center;
+    }
+
+    #curtain {
+      background:#0c84e6;
+      position: absolute;
+      /* Sit on top of the page content */
+      opacity: 0;
+      right: -100%;
+      /* Hidden by default */
+      width: 100%;
+      /* Full width (cover the whole page) */
+      height: 100%;
+      /* Full height (cover the whole page) */
+      top: 0.1px;
+      /* Black background with opacity */
+      z-index: 2;
+    }
+    
+    .screen-change {
+        animation-name: screen-change;
+        animation-duration: 2s;
+    }
+  
+    @keyframes screen-change {
+        0% {opacity: 0;}
+        30% {opacity: 1;}
+        /* Waiting time */
+        70% {opacity: 1;}
+        100% {opacity: 0;}
+    }
+
+    div:-webkit-full-screen {
+      width: 100% !important;
+    }
+    div:-moz-full-screen {
+      width: 100% !important;
+    }
+    div:-ms-fullscreen {
+      width: 100% !important;
+    }
+    div:fullscreen {
+      width: 100% !important;
+    }
+    
+    /* While in fullscreen, hide any children with class 'tohide' */
+    :-webkit-full-screen .tohide {
+      display: none;
+    }
+    :-moz-full-screen .tohide {
+      display: none;
+    }
+    :-ms-fullscreen .tohide {
+      display: none;
+    }
+    :fullscreen .tohide {
+      display: none;
+    }
+
+    @media screen and (max-width: 576px) {
+
+      html, body{overflow-y: scroll;overflow-x: hidden;}
+
+      #overlayIntro {display: none;}
+      #overlayIntro-phone {display: block;}
+      #overlayKindney {overflow-y: scroll;overflow-x: hidden;}
+      #overlayID{ width: 8vw; height: 8vw; line-height: 8vw;}
+      
+    }
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
